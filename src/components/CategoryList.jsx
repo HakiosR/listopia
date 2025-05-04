@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { DragDropContext, Draggable } from 'react-beautiful-dnd';
+import StrictModeDroppable from './StrictModeDroppable';
 
 function CategoryList({
   categories,
@@ -42,7 +43,7 @@ function CategoryList({
       </form>
 
       <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="categories">
+        <StrictModeDroppable droppableId="categories">
           {(provided) => (
             <div ref={provided.innerRef} {...provided.droppableProps} className="space-y-2">
               {categories.map((cat, index) => (
@@ -52,6 +53,7 @@ function CategoryList({
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
+                      style={provided.draggableProps.style}
                       onClick={() => onSelectCategory(cat.id)}
                       className={`p-3 rounded-md border border-gray-200 shadow-sm flex justify-between items-center cursor-pointer transition ${
                         selectedCategoryId === cat.id
@@ -89,7 +91,7 @@ function CategoryList({
               {provided.placeholder}
             </div>
           )}
-        </Droppable>
+        </StrictModeDroppable>
       </DragDropContext>
     </div>
   );
