@@ -23,7 +23,7 @@ function CategoryList({
   };
 
   return (
-    <div className="p-4 bg-white rounded-lg shadow-md">
+    <div className="p-4 bg-white rounded-lg shadow-md text-black">
       <h3 className="text-2xl font-semibold mb-4">Catégories</h3>
 
       <form onSubmit={handleAdd} className="mb-4 flex gap-2">
@@ -53,15 +53,19 @@ function CategoryList({
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
-                      style={provided.draggableProps.style}
                       onClick={() => onSelectCategory(cat.id)}
-                      className={`p-3 rounded-md border border-gray-200 shadow-sm flex justify-between items-center cursor-pointer transition ${
-                        selectedCategoryId === cat.id
-                          ? 'bg-blue-50'
-                          : snapshot.isDragging
-                          ? 'bg-gray-100'
-                          : 'bg-white'
-                      }`}
+                      style={{
+                        ...provided.draggableProps.style,
+                        userSelect: "none",
+                        backgroundColor:
+                          selectedCategoryId === cat.id
+                            ? "#ebf8ff"
+                            : snapshot.isDragging
+                            ? "#f0f0f0"
+                            : "white",
+                        color: 'black'
+                      }}
+                      className="p-3 rounded-md border border-gray-200 shadow-sm flex justify-between items-center cursor-pointer transition"
                     >
                       <span className="font-medium truncate">{cat.name}</span>
                       <div className="space-x-3">
